@@ -12075,3 +12075,8 @@ html {
   transform: scale(1.1); /* Grows the skill card */
   box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2); /* Adds a shadow effect */
 }
+
+.navbar-toggler-icon {
+  background-color: white; /* Makes the icon visible on a dark background */
+  border-radius: 2px;
+}
