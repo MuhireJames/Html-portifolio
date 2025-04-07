@@ -28,6 +28,39 @@
     />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+    <style>
+      /* Animation for the photo and name section */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animated-photo {
+        animation: fadeInUp 1s ease-in-out;
+      }
+
+      .animated-name {
+        animation: fadeInUp 1.2s ease-in-out;
+      }
+
+      /* Animation for About Me section */
+      .about-me {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .about-me.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
   </head>
   <body class="d-flex flex-column h-100 bg-black text-white">
     <main class="flex-shrink-0">
@@ -76,7 +109,9 @@
         <div class="container px-5 pb-5">
           <div class="row gx-5 align-items-center">
             <!-- Profile Icon -->
-            <div class="col-md-4 text-center text-md-start mb-4 mb-md-0">
+            <div
+              class="col-md-4 text-center text-md-start mb-4 mb-md-0 animated-photo"
+            >
               <img
                 class="rounded-circle border border-3 border-light shadow-lg"
                 src="assets/James.jpg"
@@ -88,7 +123,7 @@
               />
             </div>
             <!-- Name and Title -->
-            <div class="col-md-8 text-center text-md-start">
+            <div class="col-md-8 text-center text-md-start animated-name">
               <h2 class="fw-bold">Hi, I'm MUHIRE James</h2>
               <p class="fs-5">Backend Developer Learner at AlX</p>
               <p class="lead fw-normal text-white mb-3">
@@ -105,7 +140,7 @@
               >
                 <a
                   class="btn btn-outline-light btn-lg px-5 py-3 fs-6 fw-bolder me-3"
-                  href="resume.html"
+                  href="skills.html"
                   >Skills</a
                 >
                 <a
@@ -122,7 +157,7 @@
       <section class="py-3 bg-black text-white">
         <div class="container px-5">
           <div class="row gx-5 justify-content-center">
-            <div class="col-xxl-8">
+            <div class="col-xxl-8 about-me">
               <div class="text-center my-4">
                 <h3 class="display-5 fw-bolder">
                   <span class="text-gradient d-inline">About Me</span>
@@ -187,5 +222,22 @@
 
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+    <script>
+      // Intersection Observer for About Me Section
+      const aboutMeSection = document.querySelector(".about-me");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              aboutMeSection.classList.add("visible");
+              observer.unobserve(aboutMeSection); // Stop observing after animation
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      observer.observe(aboutMeSection);
+    </script>
   </body>
 </html>
